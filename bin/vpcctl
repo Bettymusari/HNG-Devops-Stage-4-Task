@@ -1,0 +1,107 @@
+#!/bin/bash
+set -e
+
+# Configuration
+VPC_DIR="/tmp/vpc-project"
+mkdir -p $VPC_DIR
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+log() {
+    echo -e "${GREEN}[vpcctl]${NC} $1"
+}
+
+error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+warn() {
+    echo -e "${YELLOW}[WARN]${NC} $1"
+}
+
+usage() {
+    echo "Usage: $0 {create|delete|add-subnet|list|cleanup|nat|peer} [args]"
+    echo "  create <vpc-name> <cidr>        Create a new VPC"
+    echo "  delete <vpc-name>               Delete a VPC"
+    echo "  add-subnet <vpc-name> <subnet-name> <cidr> <type>  Add subnet"
+    echo "  list                            List all VPCs"
+    echo "  nat <vpc-name>                  Configure NAT for VPC"
+    echo "  peer <vpc1> <vpc2>              Create VPC peering"
+    echo "  firewall <vpc> <policy-file>    Apply firewall rules"
+    echo "  cleanup                         Remove all VPC resources"
+    exit 1
+}
+
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+    error "Please run as root: sudo $0 $*"
+    exit 1
+fi
+
+case "$1" in
+    create)
+        if [ $# -ne 3 ]; then
+            error "Usage: $0 create <vpc-name> <cidr>"
+            exit 1
+        fi
+        VPC_NAME="$2"
+        CIDR_BLOCK="$3"
+        source lib/create.sh
+        ;;
+    delete)
+        if [ $# -ne 2 ]; then
+            error "Usage: $0 delete <vpc-name>"
+            exit 1
+        fi
+        VPC_NAME="$2"
+        source lib/delete.sh
+        ;;
+    add-subnet)
+        if [ $# -ne 5 ]; then
+            error "Usage: $0 add-subnet <vpc-name> <subnet-name> <cidr> <public|private>"
+            exit 1
+        fi
+        VPC_NAME="$2"
+        SUBNET_NAME="$3"
+        SUBNET_CIDR="$4"
+        SUBNET_TYPE="$5"
+        source lib/subnet.sh
+        ;;
+    list)
+        source lib/list.sh
+        ;;
+    nat)
+        if [ $# -ne 2 ]; then
+            error "Usage: $0 nat <vpc-name>"
+            exit 1
+        fi
+        VPC_NAME="$2"
+        source lib/nat.sh
+        ;;
+    peer)
+        if [ $# -ne 3 ]; then
+            error "Usage: $0 peer <vpc1> <vpc2>"
+            exit 1
+        fi
+        source lib/peer.sh "$2" "$3"
+        ;;
+    firewall)
+        if [ $# -ne 3 ]; then
+            error "Usage: $0 firewall <vpc-name> <policy-file>"
+            exit 1
+        fi
+        VPC_NAME="$2"
+        POLICY_FILE="$3"
+        source lib/firewall.sh "$2" "$3"
+        ;;
+    cleanup)
+        source lib/cleanup.sh
+        ;;
+    *)
+        usage
+        ;;
+esac
