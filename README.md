@@ -143,27 +143,39 @@ MIT — free for learning, modifying, and experimentation.
 ---
 
 ## 📸 Proof of Implementation (Screenshots)
-✅ ![VPC Created](screenshots/vpc-create-verify.png) VPC Created Successfully
 
-🔗 ![VPC Peering](screenshots/vpc-peering-1.png) VPC Peering Established
+### ✅ VPC Created Successfully
+![VPC Created](screenshots/vpc-create-verify.png)
 
-🚫 ![VPC Isolation](screenshots/vpc-vpcisolation-test.png) VPC Isolation Test (No Communication Without Peering)
+### 🔗 VPC Peering Established
+![VPC Peering](screenshots/vpc-peering-1.png)
 
-🧩 ![Assign IP](screenshots/vpc2-assignIP-namespace.png) Assigning IP to Namespace (Subnet Configuration)
+### 🚫 VPC Isolation Test (No Communication Without Peering)
+![VPC Isolation](screenshots/vpc-vpcisolation-test.png)
 
-🌐 ![Subnet Test](screenshots/vpc2-inernat-subnet-subnet-ping.png)Cross-Subnet Connectivity Test
+### 🧩 Assigning IP to Namespace (Subnet Configuration)
+![Assign IP](screenshots/vpc2-assignIP-namespace.png)
 
-🔁 ![Peering Forwarding](screenshots/vps-peering-forwarding.png) Peering Forwarding Traffic Between VPCs
+### 🌐 Cross-Subnet Connectivity Test
+![Subnet Test](screenshots/vpc2-inernat-subnet-subnet-ping.png)
 
-✅ What These Screenshots Prove
-Feature	Status
-VPC Creation	✔ Verified
-Subnet & Namespace Config	✔ Verified
-VPC Isolation	✔ No cross-VPC traffic without peering
-VPC Peering	✔ Connectivity established after peering
-Routing & Forwarding	✔ Traffic flows via peering link
+### 🔁 Peering Forwarding Traffic Between VPCs
+![Peering Forwarding](screenshots/vps-peering-forwarding.png)
 
-All execution screenshots are available in the `/screenshots` folder.
+---
+
+## ✅ What These Screenshots Prove
+
+| Feature | Status |
+|--------|--------|
+| VPC Creation |                     ✔ Verified |
+| Subnet & Namespace Configuration | ✔ Verified |
+| VPC Isolation |                    ✔ No cross-VPC traffic without peering |
+| VPC Peering |                      ✔ Connectivity established after peering |
+| Routing & Forwarding |             ✔ Traffic flows via peering link |
+
+📁 All execution screenshots are available in the `/screenshots` folder.
+
 
 ---
 
