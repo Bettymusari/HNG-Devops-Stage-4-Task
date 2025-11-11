@@ -142,7 +142,26 @@ MIT — free for learning, modifying, and experimentation.
 
 ---
 
-## 📸 Evidence (Screenshots)
+## 📸 Proof of Implementation (Screenshots)
+✅ VPC Created Successfully
+
+🔗 VPC Peering Established
+
+🚫 VPC Isolation Test (No Communication Without Peering)
+
+🧩 Assigning IP to Namespace (Subnet Configuration)
+
+🌐 Cross-Subnet Connectivity Test
+
+🔁 Peering Forwarding Traffic Between VPCs
+
+✅ What These Screenshots Prove
+Feature	Status
+VPC Creation	✔ Verified
+Subnet & Namespace Config	✔ Verified
+VPC Isolation	✔ No cross-VPC traffic without peering
+VPC Peering	✔ Connectivity established after peering
+Routing & Forwarding	✔ Traffic flows via peering link
 All execution screenshots are available in the `/screenshots` folder.
 
 ---
